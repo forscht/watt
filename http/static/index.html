@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<meta content="text/html;charset=UTF-8" http-equiv="content-type"/>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="{{serviceName}} is a free service that lets you create the fastest, simplest, most shareable web pages on the internet using any phone, tablet, or computer you have."
+          name="Description">
+    <meta content="Barry T. Smith" name="author">
+
+    <meta content="index.html" property="og:url">
+    <meta content="{{serviceName}} - Fast temp mail address for everybody" property="og:title">
+    <meta content="favicon-196x196.png" property="og:image">
+    <meta content="{{serviceName}}" property="og:site_name">
+    <meta content="{{serviceName}} is a free and open-source temporary email service that provides ad-free and fast email addresses for temporary use. With {{serviceName}}, you can quickly create temporary email addresses for various purposes, such as signing up for online services, protecting your privacy, and avoiding spam in your personal inbox."
+          property="og:description">
+
+    <meta content="summary" name="twitter:card">
+    <meta content="@thebarrytone" name="twitter:creator">
+    <meta content="{{serviceName}} - Fast temp mail address for everybody" name="twitter:title">
+    <meta content="{{serviceName}} is a free and open-source temporary email service that provides ad-free and fast email addresses for temporary use. With {{serviceName}}, you can quickly create temporary email addresses for various purposes, such as signing up for online services, protecting your privacy, and avoiding spam in your personal inbox."
+          name="twitter:description">
+
+    <title> {{serviceName}} - Fast temp mail address for everybody!</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+
+
+    <link href="css/styles.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+<h1><a href="index.html">{{serviceName}}</a></h1>
+<p>Fast temp mail address for everybody!</p>
+<a href="about.html">What is {{serviceName}}?</a> | <a href="https://github.com/forscht/ddrive"> Source Code</a>
+<br><br>
+<label for="address-input"><b>New Inbox</b></label> </br>
+<input class="address-create" id="address-input" placeholder="yourname@{{domain}}" type="text">
+<button class="address-create" id="create-inbox-button" type="button">Create</button>
+
+<div id="recent-inbox-block">
+    <p id="recent-inbox-title"><b>Recent Inboxes</b></p>
+</div>
+
+<p id="notification"></p>
+<p id="term-service">By continuing, you agree to the <a href="terms.html">terms of service.</a></p>
+
+<!--New section to load inbox dynamically-->
+<section id="inbox-section" style="display:none;">
+</section>
+
+<script src="js/index.js"></script>
+<script>
+    const createInboxButton = document.getElementById('create-inbox-button');
+    const termService = document.getElementById('term-service')
+    const inboxSection = document.getElementById('inbox-section');
+    const recentInboxBlock = document.getElementById('recent-inbox-block')
+    const notification = document.getElementById('notification')
+    let inbox = undefined
+    let timeout = undefined
+
+    function setInbox(addr) {
+        inboxSection.style.display = 'block';
+        termService.style.display = 'none';
+
+        // Create ws connection
+        if (inbox) inbox.destroy()
+        inbox = new Inbox(inboxSection, addr)
+        inbox.connect()
+
+        // Copy address to clipboard
+        copyTextToClipboard(addr)
+
+        // Show notification for 3 seconds
+        showNotification(`${addr} copied to clipboard!`, 2000)
+    }
+
+    function showNotification(text, duration) {
+        notification.style.display = 'block'
+        notification.innerText = text
+        if (timeout) clearTimeout(timeout)
+        timeout = setTimeout(() => notification.style.display = 'none', duration)
+    }
+
+    function addInboxToRecent(addr) {
+        const button = document.createElement('button')
+        button.innerText = addr
+        button.addEventListener('click', function () {
+            setInbox(addr)
+        })
+        recentInboxBlock.appendChild(button)
+        recentInboxBlock.appendChild(document.createTextNode('\u00A0'))
+    }
+
+    function loadRecentInboxes() {
+        const addrs = getRecentInboxesFromLS()
+        for (const addr of addrs) {
+            addInboxToLS(addr)
+            addInboxToRecent(addr)
+        }
+    }
+
+    createInboxButton.addEventListener('click', function () {
+        const addressInput = document.getElementById('address-input');
+        const address = addressInput.value.toLowerCase();
+
+        if (!validateEmail(address)) {
+            alert('Invalid email address.\nPlease enter a valid email address ending with "{{domain}}".');
+            return;
+        }
+
+        setInbox(address)
+
+        if (!existInLS(address)) {
+            addInboxToRecent(address)
+            addInboxToLS(address)
+        }
+    });
+    loadRecentInboxes()
+</script>
+</body>
+
+</html>

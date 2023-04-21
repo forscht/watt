@@ -1,0 +1,53 @@
+html {
+    -webkit-text-size-adjust: 100%;
+    padding-bottom: 4em
+}
+
+body {
+    font-family: sans-serif;
+    line-height: 1.5em;
+    max-width: 40em;
+    padding: 0 2%;
+    margin: auto
+}
+
+.important {
+    color: red
+}
+
+.footer {
+    text-align: right
+}
+
+.centered {
+    text-align: center
+}
+
+.nope {
+    display: none
+}
+
+.ad-container {
+    float: left;
+    min-width: 33%
+}
+
+.address-create {
+    font-size: 1rem;
+}
+
+#term-service {
+    font-size: 0.9rem;
+}
+
+button {
+    font-size: 1rem;
+}
+
+#recent-inbox-title {
+    margin-bottom: 0.1rem;
+}
+
+#email-li {
+    font-size: 1rem;
+}
