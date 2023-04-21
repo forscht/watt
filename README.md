@@ -16,25 +16,17 @@ Some of the key features of Watt include:
 
 Overall, Watt is a simple and powerful SMTP wrapper that provides a secure and convenient way to manage temporary email addresses. It is a great solution for users who want to protect their privacy online and avoid spam emails.
 
-### Installation
-1. Install Go: To use the Watt project, you first need to install the Go programming language. You can download the Go installer from the official website of Go.
-2. Clone the Watt Repository: Once Go is installed, clone the Watt repository from Github using the following command in your terminal:
-    ```shell
-    git clone git clone https://github.com/forscht/watt.git
-    ```
-3. Install Dependencies: Watt has dependencies that need to be installed before it can be used. You can install them by running the following command in the cloned Watt directory:
-    ```shell
-    go mod tidy
-    ```
-4. Build watt binary with below command:
-   ```shell
-   go build
-   ```
-5. Run watt with following command:
+### Installation 
+1. Go to the [Releases](https://github.com/forscht/watt/releases) section of this repository.
+2. Choose the version of Watt that you want to install.
+3. Download the binary for your operating system. There are binaries for Windows, Linux, and macOS.
+4. Extract the downloaded binary to a directory on your system.
+5. Locate `watt` file (`watt.exe` for windows)
+6. Open command prompt / terminal on same directory
+7. Start watt with following command:
    ```shell
    sudo ./watt --domain yourdomain.com
    ```
-   
 
 ### Usage
 To start Watt, simply run the built executable. Watt accepts several command-line options, which are listed below:
@@ -79,6 +71,26 @@ Watt also accepts `.env` file. Below are the descriptions of each variable:
 5. Save the changes to your DNS settings.
 6. Wait for the DNS changes to propagate, which can take up to 24 hours.
 7. Test your Watt instance by sending an email to an address at your domain and checking that it is received by your Watt instance.
+
+
+### Building from source
+1. Install Go: To build the Watt project, you first need to install the Go programming language. You can download the Go installer from the official website of Go.
+2. Clone the Watt Repository: Once Go is installed, clone the Watt repository from GitHub using the following command in your terminal:
+    ```shell
+    git clone git clone https://github.com/forscht/watt.git
+    ```
+3. Install Dependencies: Watt has dependencies that need to be installed before it can be used. You can install them by running the following command in the cloned Watt directory:
+    ```shell
+    go mod tidy
+    ```
+4. Build watt binary with below command:
+   ```shell
+   go build
+   ```
+5. Run watt with following command:
+   ```shell
+   sudo ./watt --domain yourdomain.com
+   ```
 
 ### License
 Watt is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
