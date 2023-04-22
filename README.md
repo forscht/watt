@@ -1,18 +1,16 @@
 # watt
-Watt is an open-source SMTP wrapper written in Go that provides a simple web interface for creating and managing temporary email addresses.
+Watt is an open-source smtp wrapper written in Go that provides a simple web interface for creating and managing temporary email addresses.
 It is designed to be a self-hosted solution that enables users to create and receive temporary email addresses without the need for a third-party service.
 
-With Watt, users can easily generate a temporary email address that can be used to sign up for online services, verify accounts, or receive email notifications without revealing their real email address. The web interface provides a simple and intuitive way to manage multiple email addresses, delete old messages, and view message history.
+### Some of the key features of Watt include:
 
-Some of the key features of Watt include:
+- **Simple web interface:** No bs lightning-fast web interface. Watt store recently used addresses in browser storage for forever so you don't need to remember them.
 
-- Simple web interface: No bs lightning-fast web interface. Watt store recently used addresses in browser storage for forever so you don't need to remember them.
+- **Self-hosted:** Watt is designed to be a self-hosted solution, which means that users have full control over their data and can run the service on their own servers. You can self-host your own temporary email service under 15 minutes using watt.
 
-- Self-hosted: Watt is designed to be a self-hosted solution, which means that users have full control over their data and can run the service on their own servers.
+- **Fast and lightweight:** Watt is written in Go, which makes it fast and lightweight. It is designed to handle a large number of email requests and can be easily scaled to meet the needs of high traffic websites.
 
-- Fast and lightweight: Watt is written in Go, which makes it fast and lightweight. It is designed to handle a large number of email requests and can be easily scaled to meet the needs of high traffic websites.
-
-- Customizable: Watt is highly customizable and can be easily configured to meet the specific needs of different users. Users can customize the SMTP server settings, TTL cache duration, and domain name.
+- **Customizable:** Watt is highly customizable and can be easily configured to meet the specific needs of different users. Users can customize the SMTP server settings, TTL cache duration, and domain name.
 
 Overall, Watt is a simple and powerful SMTP wrapper that provides a secure and convenient way to manage temporary email addresses. It is a great solution for users who want to protect their privacy online and avoid spam emails.
 
