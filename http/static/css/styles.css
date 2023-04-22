@@ -51,3 +51,7 @@ button {
 #email-li {
     font-size: 1rem;
 }
+
+#inbox-section {
+    display: none;
+}

@@ -1,11 +1,11 @@
 <!doctype html>
-<html>
+<html lang="en">
 <meta content="text/html;charset=UTF-8" http-equiv="content-type"/>
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="{{serviceName}} is a free and open-source temporary email service that provides ad-free and fast email addresses for temporary use."
-          name="Description">
+          name="description">
     <meta content="Darshan H." name="author">
 
     <meta content="index.html" property="og:url">
@@ -35,8 +35,6 @@
     <meta name="msapplication-config" content="favicon/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
 
-
-
     <link href="css/styles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -57,7 +55,7 @@
 <p id="term-service">By continuing, you agree to the <a href="terms.html">terms of service.</a></p>
 
 <!--New section to load inbox dynamically-->
-<section id="inbox-section" style="display:none;">
+<section id="inbox-section">
 </section>
 
 <script src="js/index.js"></script>
@@ -113,7 +111,13 @@
 
     createInboxButton.addEventListener('click', function () {
         const addressInput = document.getElementById('address-input');
-        const address = addressInput.value.toLowerCase();
+        let address = addressInput.value.toLowerCase();
+
+        const domain = '{{domain}}';
+        const addressParts = address.split('@');
+        if (addressParts.length === 1) {
+            address = `${address}@${domain}`;
+        }
 
         if (!validateEmail(address)) {
             alert('Invalid email address.\nPlease enter a valid email address ending with "{{domain}}".');
